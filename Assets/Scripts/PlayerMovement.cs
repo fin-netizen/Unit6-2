@@ -25,8 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         state = States.Idle;
+        rb = GetComponent<Rigidbody>();
+        
 
         xvel = rb.linearVelocity.x;
         yvel = rb.linearVelocity.y;
@@ -40,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     {
         DoMove();
         DoJump();
+        DoWalk();
 
     }
     public void DoJump()
@@ -70,6 +72,34 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
+    public void DoWalk()
+    {
+        if (Input.GetKey("left"))
+        {
+            anim.SetBool("IsWalking", true);
+            state = States.Walk;
+        }
+        
+        if (Input.GetKey("right"))
+        {
+            anim.SetBool("IsWalking", true);
+            state = States.Walk;
+        }
+        
+        if (Input.GetKey("up"))
+        {
+            anim.SetBool("IsWalking", true);
+            state = States.Walk;
+        }
+        
+        
+        if (Input.GetKey("down"))
+        {
+            anim.SetBool("IsWalking", true);
+            state = States.Walk;
+        }
+        
+    }
     public void DoMove()
     {
         //old input system
@@ -94,12 +124,11 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 vel = moveDir.normalized * speed;
             rb.linearVelocity = new Vector3(vel.x, rb.linearVelocity.y, vel.z);
-            anim.SetBool("IsWalking", true);
         }
         else
         {
+           state = States.Idle;
             anim.SetBool("IsWalking", false);
-            //state = States.Idle;
         }
     }
 }

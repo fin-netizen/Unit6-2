@@ -1111,6 +1111,7 @@ GameObject:
   - component: {fileID: 601365776}
   - component: {fileID: 601365775}
   - component: {fileID: 601365774}
+  - component: {fileID: 601365777}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1160,9 +1161,9 @@ MonoBehaviour:
   controller: {fileID: 0}
   cam: {fileID: 330585546}
   IsWalking: 0
-  speed: 6
+  speed: 3
   turnSmoothTime: 0.1
-  anim: {fileID: 0}
+  anim: {fileID: 601365777}
 --- !u!4 &601365776
 Transform:
   m_ObjectHideFlags: 0
@@ -1180,6 +1181,28 @@ Transform:
   - {fileID: 1693789673}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &601365777
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601365773}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 9a3449624c7040d41834db9bfa7ee999, type: 3}
+  m_Controller: {fileID: 9100000, guid: ce225ad45db12544cbcf7f24e92310ea, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &768805928
 GameObject:
   m_ObjectHideFlags: 0
