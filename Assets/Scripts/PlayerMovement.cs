@@ -93,17 +93,12 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
             Vector3 vel = moveDir.normalized * speed;
-            //direction *= speed;
-            //Vector3 vel = moveDir.normalized * speed;
-
-            //playerVelocity.x = vel.x;
-            //playerVelocity.z = vel.z;
-            //anim.SetBool("IsWalking", true);
-            //controller.Move(moveDir.normalized * speed * Time.deltaTime); 
             rb.linearVelocity = new Vector3(vel.x, rb.linearVelocity.y, vel.z);
+            anim.SetBool("IsWalking", true);
         }
         else
         {
+            anim.SetBool("IsWalking", false);
             //state = States.Idle;
         }
     }

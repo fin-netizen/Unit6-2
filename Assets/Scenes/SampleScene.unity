@@ -336,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 9a3449624c7040d41834db9bfa7ee999, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 9a3449624c7040d41834db9bfa7ee999, type: 3}
       propertyPath: m_Controller
@@ -1127,8 +1127,8 @@ Rigidbody:
   m_GameObject: {fileID: 601365773}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 0.05
+  m_AngularDamping: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -3781,6 +3781,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 0b07b345731e07641a5b0399bd6a1c44, type: 2}
+    - target: {fileID: 5866666021909216657, guid: f7d29dd77d8e993468f74a41ba74d450, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8773566015541685602, guid: f7d29dd77d8e993468f74a41ba74d450, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
