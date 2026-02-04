@@ -13,6 +13,7 @@ public enum States // used by all logic
 public class PlayerMovement : MonoBehaviour
 {
     States state;
+    public int PlayerHealth = 3;
     public CharacterController controller;
     public Transform cam;
     public bool IsWalking;
@@ -25,8 +26,10 @@ public class PlayerMovement : MonoBehaviour
     float xvel, yvel, zvel;
     public Animator anim;
     public Transform RespawnPoint;
+    float timer;
     private void Start()
     {
+        timer = 4;
         state = States.Idle;
         rb = GetComponent<Rigidbody>();
         
@@ -45,6 +48,10 @@ public class PlayerMovement : MonoBehaviour
         DoJump();
         DoLogic();
         IsDead();
+        if(PlayerHealth == 0)
+        {
+            state = States.Dead;
+        }
     }
    
     public void DoLogic()
@@ -57,19 +64,28 @@ public class PlayerMovement : MonoBehaviour
         {
             IsDead();
         }
-        
+        if(state == States.Jump)
+        {
+            DoJump();
+        }
     }
     public void DoJump()
     {
         if (Input.GetKey("space"))
         {
-
+            yvel = 5f;
         }
 
     }
     public void IsDead()
     {
-        RespawnPlayer();
+        anim.SetBool("IsDying", true);
+        timer -= Time.deltaTime;
+        if(timer <= 0)
+        {
+            RespawnPlayer();
+        }
+        
     }
     public void DoMove()
     {
@@ -106,5 +122,6 @@ public class PlayerMovement : MonoBehaviour
     void RespawnPlayer()
     {
         transform.position = RespawnPoint.position;
+        state = States.Idle;
     }
 }
