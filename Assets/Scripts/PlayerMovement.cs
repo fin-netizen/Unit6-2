@@ -7,6 +7,8 @@ public enum States // used by all logic
     None,
     Idle,
     Walk,
+    Jump,
+    Dead,
 }
 public class PlayerMovement : MonoBehaviour
 {
@@ -22,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     float xvel, yvel, zvel;
     public Animator anim;
-
+    public Transform RespawnPoint;
     private void Start()
     {
         state = States.Idle;
@@ -41,44 +43,33 @@ public class PlayerMovement : MonoBehaviour
     {
         DoMove();
         DoJump();
-        DoWalk();
-
+        DoLogic();
+        IsDead();
     }
-    public void DoJump()
-    {
-        
-
-        /*
-        if(Input.GetKey("w"))
-        {
-            zvel = 5f;
-        }
-        if (Input.GetKey("s"))
-        {
-            zvel = -5f;
-        }
-        if (Input.GetKey("a"))
-        {
-            xvel = 5f;
-        }
-        if (Input.GetKey("d"))
-        {
-            zvel = -5f;
-        }
-        */
-        if (Input.GetKey("space"))
-        {
-  
-        }
-        
-    }
-    public void DoWalk()
+   
+    public void DoLogic()
     {
         if(state == States.Walk)
         {
             DoMove();
         }
+        if(state == States.Dead)
+        {
+            IsDead();
+        }
         
+    }
+    public void DoJump()
+    {
+        if (Input.GetKey("space"))
+        {
+
+        }
+
+    }
+    public void IsDead()
+    {
+        RespawnPlayer();
     }
     public void DoMove()
     {
@@ -111,5 +102,9 @@ public class PlayerMovement : MonoBehaviour
            state = States.Idle;
             anim.SetBool("IsWalking", false);
         }
+    }
+    void RespawnPlayer()
+    {
+        transform.position = RespawnPoint.position;
     }
 }
