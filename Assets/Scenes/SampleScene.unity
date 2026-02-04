@@ -342,6 +342,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: ce225ad45db12544cbcf7f24e92310ea, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 9a3449624c7040d41834db9bfa7ee999, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5957484942116604506, guid: 9a3449624c7040d41834db9bfa7ee999, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -350,8 +354,7 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 6084cef7fe433724abaeca9ad830d95d, type: 2}
-    m_RemovedComponents:
-    - {fileID: 5866666021909216657, guid: 9a3449624c7040d41834db9bfa7ee999, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1160,8 +1163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   controller: {fileID: 0}
   cam: {fileID: 330585546}
-  IsWalking: 0
-  speed: 3
+  IsWalking: 1
+  speed: 4
   turnSmoothTime: 0.1
   anim: {fileID: 601365777}
 --- !u!4 &601365776

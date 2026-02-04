@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
             zvel = -5f;
         }
         */
-        if (jumpAction.IsPressed())
+        if (Input.GetKey("space"))
         {
   
         }
@@ -74,29 +74,9 @@ public class PlayerMovement : MonoBehaviour
     }
     public void DoWalk()
     {
-        if (Input.GetKey("left"))
+        if(state == States.Walk)
         {
-            anim.SetBool("IsWalking", true);
-            state = States.Walk;
-        }
-        
-        if (Input.GetKey("right"))
-        {
-            anim.SetBool("IsWalking", true);
-            state = States.Walk;
-        }
-        
-        if (Input.GetKey("up"))
-        {
-            anim.SetBool("IsWalking", true);
-            state = States.Walk;
-        }
-        
-        
-        if (Input.GetKey("down"))
-        {
-            anim.SetBool("IsWalking", true);
-            state = States.Walk;
+            DoMove();
         }
         
     }
@@ -124,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 vel = moveDir.normalized * speed;
             rb.linearVelocity = new Vector3(vel.x, rb.linearVelocity.y, vel.z);
+            anim.SetBool("IsWalking", true);
         }
         else
         {
