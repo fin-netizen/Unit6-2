@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         if (target == null)
         {
             if(GameObject.FindWithTag("Player")!=null)
@@ -18,19 +19,20 @@ public class EnemyMovement : MonoBehaviour
                 target = GameObject.FindWithTag("Player").GetComponent<Transform>();
             }
         }
-        anim.SetBool("isPartrolling", false);
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+        anim.SetBool("isPartrolling", false);
         if (target == null)
             return;
         transform.LookAt(target);
         float distance = Vector3.Distance(transform.position, target.position);
         if (distance > minDist)
             transform.position += transform.forward * speed * Time.deltaTime;
-        anim.SetBool("isPartrolling", true);
+            anim.SetBool("isPartrolling", true);
     }
     public void SetTarget(Transform newTarget)
     {
