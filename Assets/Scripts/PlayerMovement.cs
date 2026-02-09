@@ -7,7 +7,7 @@ public enum States // used by all logic
     None,
     Idle,
     Walk,
-    Jump,
+    Run,
     Dead,
 }
 public class PlayerMovement : MonoBehaviour
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         DoMove();
-        DoJump();
+        DoRun();
         DoLogic();
         IsDead();
         if(PlayerHealth == 0)
@@ -64,17 +64,14 @@ public class PlayerMovement : MonoBehaviour
         {
             IsDead();
         }
-        if(state == States.Jump)
+        if(state == States.Run)
         {
-            DoJump();
+            DoRun();
         }
     }
-    public void DoJump()
+    public void DoRun()
     {
-        if (Input.GetKey("space"))
-        {
-            yvel = 5f;
-        }
+       
 
     }
     public void IsDead()
