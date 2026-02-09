@@ -6,6 +6,8 @@ public class EnemyMovement : MonoBehaviour
     public float minDist = 1f;
     public Transform target;
     Rigidbody rb;
+    public bool isPartrolling;
+    public Animator anim;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,6 +18,7 @@ public class EnemyMovement : MonoBehaviour
                 target = GameObject.FindWithTag("Player").GetComponent<Transform>();
             }
         }
+        anim.SetBool("isPartrolling", false);
     }
 
     // Update is called once per frame
@@ -27,6 +30,7 @@ public class EnemyMovement : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position);
         if (distance > minDist)
             transform.position += transform.forward * speed * Time.deltaTime;
+        anim.SetBool("isPartrolling", true);
     }
     public void SetTarget(Transform newTarget)
     {

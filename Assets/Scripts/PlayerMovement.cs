@@ -13,11 +13,13 @@ public enum States // used by all logic
 public class PlayerMovement : MonoBehaviour
 {
     States state;
-    public int PlayerHealth = 3;
+    int playerHealth;
     public CharacterController controller;
     public Transform cam;
-    public bool IsWalking;
+    public bool isWalking;
+    public bool isRunning;
     public float speed = 6f;
+    public float runSpeed = 8f;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
     InputAction moveAction;
@@ -25,14 +27,16 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     float xvel, yvel, zvel;
     public Animator anim;
-    public Transform RespawnPoint;
+    public Transform respawnPoint;
     float timer;
+
     private void Start()
     {
         timer = 4;
         state = States.Idle;
         rb = GetComponent<Rigidbody>();
-        
+
+        playerHealth = 3;
 
         xvel = rb.linearVelocity.x;
         yvel = rb.linearVelocity.y;
@@ -40,25 +44,28 @@ public class PlayerMovement : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
 
+        
+
+
     }
     // Update is called once per frame
     void Update()
     {
-        DoMove();
-        DoRun();
         DoLogic();
-        IsDead();
-        if(PlayerHealth == 0)
-        {
-            state = States.Dead;
-        }
     }
    
     public void DoLogic()
     {
-        if(state == States.Walk)
+        if (state == States.Idle)
+        {
+            DoIdle();
+        }
+
+
+        if (state == States.Walk)
         {
             DoMove();
+            CheckForDeath();
         }
         if(state == States.Dead)
         {
@@ -66,14 +73,36 @@ public class PlayerMovement : MonoBehaviour
         }
         if(state == States.Run)
         {
-            DoRun();
+            //DoRun();
+            //CheckForDeath();
         }
     }
+
+    /*
     public void DoRun()
     {
-       
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            anim.SetBool("IsRunning", true);
+        }
+        else
+        {
+            state = States.Walk;
+            anim.SetBool("IsRunning", false);
+        }
+    }
+    */
+
+    void DoIdle()
+    {
+        if( moveAction.ReadValue<Vector2>().magnitude > 0.1f )
+        {
+            state = States.Walk;
+        }
+
 
     }
+
     public void IsDead()
     {
         anim.SetBool("IsDying", true);
@@ -86,10 +115,6 @@ public class PlayerMovement : MonoBehaviour
     }
     public void DoMove()
     {
-        //old input system
-        //float horizontal = Input.GetAxisRaw("Horizontal");
-        //float vertical = Input.GetAxisRaw("Vertical");
-
         //new input system
         float horizontal = moveAction.ReadValue<Vector2>().x;
         float vertical = moveAction.ReadValue<Vector2>().y;
@@ -113,12 +138,30 @@ public class PlayerMovement : MonoBehaviour
         else
         {
            state = States.Idle;
-            anim.SetBool("IsWalking", false);
+           anim.SetBool("IsWalking", false);
         }
     }
     void RespawnPlayer()
     {
-        transform.position = RespawnPoint.position;
+        transform.position = respawnPoint.position;
         state = States.Idle;
+    }
+
+    void CheckForDeath()
+    {
+        if (playerHealth == 0)
+        {
+            state = States.Dead;
+            playerHealth = 3;
+        }
+
+    }
+
+    void OnGUI()
+    {
+        string text = "state:" + state;
+        text += "\n";
+
+        GUI.Label(new Rect(10f, 10f, 200f, 200f), text);
     }
 }
